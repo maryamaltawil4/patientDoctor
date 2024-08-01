@@ -1,0 +1,53 @@
+<div class="container" >
+  <app-calendar-header-component
+    [(view)]="view"
+    [(viewDate)]="viewDate"
+    (viewDateChange)="fetchEvents()"
+    (viewChange)="fetchEvents()"
+  ></app-calendar-header-component>
+
+  <ng-template #loading>
+    <div class="text-center">
+      <i class="fas fa-spin fa-spinner fa-5x"></i> <br />
+      Loading events...
+    </div>
+  </ng-template>
+
+  <div *ngIf="events$ | async as events; else loading" class="calendar-container">
+    <div [ngSwitch]="view" class="calendar">
+      <mwl-calendar-month-view
+        *ngSwitchCase="'month'"
+        [viewDate]="viewDate"
+        [events]="events"
+        [activeDayIsOpen]="activeDayIsOpen"
+        (dayClicked)="dayClicked($event)"
+        (eventClicked)="eventClicked($event.event)"
+      >
+      </mwl-calendar-month-view>
+      <mwl-calendar-week-view
+        *ngSwitchCase="'week'"
+        [viewDate]="viewDate"
+        [events]="events"
+        (eventClicked)="eventClicked($event.event)"
+      >
+      </mwl-calendar-week-view>
+      <mwl-calendar-day-view
+        *ngSwitchCase="'day'"
+        [viewDate]="viewDate"
+        [events]="events"
+        (eventClicked)="eventClicked($event.event)"
+      >
+      </mwl-calendar-day-view>
+    </div>
+
+    <!-- List of events -->
+    <div class="event-list mt-4">
+      <h3>Marked Dates</h3>
+      <ul class="list-group">
+        <li *ngFor="let event of events" class="list-group-item">
+          <strong>{{ event.title }}</strong> - {{ event.start | date:'fullDate' }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

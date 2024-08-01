@@ -1,0 +1,11 @@
+
+<div *ngIf="patientDetails" class="patient-details-container">
+    <h2>Patient Details</h2>
+    <p><strong>MRN:</strong> {{ patientDetails.mrn }}</p>
+    <p><strong>Arabic Full Name:</strong> {{ patientDetails.arFullName }}</p>
+    <p><strong>English Full Name:</strong> {{ patientDetails.enFullName }}</p>
+    <p><strong>Birth Date:</strong> {{ patientDetails.birthDate | date: 'longDate' }}</p>
+    <p><strong>Gender:</strong> {{ patientDetails.genderNameEn }}</p>
+    <p><strong>Blood Group:</strong> {{ patientDetails.bloodGroupNameEn }}</p>
+</div>
+  

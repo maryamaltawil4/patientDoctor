@@ -1,0 +1,25 @@
+.patient-details-container {
+    padding: 50px;
+    color: black;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .patient-details-container h2 {
+    margin-bottom: 10%;
+  }
+  
+  .patient-details-container p {
+    margin: 10px 0;
+  }
+  
+  .patient-details-container strong {
+    color: #333;
+  }
+  

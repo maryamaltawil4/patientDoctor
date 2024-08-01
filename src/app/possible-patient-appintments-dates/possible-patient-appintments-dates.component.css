@@ -1,0 +1,22 @@
+.container {
+  height: 100vh; /* Make the container take the full height of the viewport */
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-container {
+  flex: 1; /* Let the calendar-container take the remaining height after the header */
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar {
+  height: 70%; /* Make the calendar take 70% of the container height */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+.event-list {
+  height: 30%; /* Make the event list take the remaining 30% of the container height */
+  overflow-y: auto; /* Allow scrolling if the list is too long */
+}
+

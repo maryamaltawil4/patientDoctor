@@ -1,0 +1,31 @@
+
+<div class="container">
+  <h2>Doctors Visited</h2>
+  <div class="buttons">
+    <button class="btn view-btn" (click)="viewAllVisits()">View the Pdf </button>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Doctor Name</th>
+          <th>Department</th>
+          <th>Visit Date</th>
+          <th>Visit Start Date</th>
+          <th>Visit End Date</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let visit of visits">
+          <td>{{ visit.doctorUserNameEn }}</td>
+          <td>{{ visit.departmentName }}</td>
+          <td>{{ visit.visitDate | date:'medium' }}</td>
+          <td>{{ visit.visitStartDate | date:'medium' }}</td>
+          <td>{{ visit.visitEndDate | date:'medium' }}</td>
+          <td>{{ visit.physicianNotes }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

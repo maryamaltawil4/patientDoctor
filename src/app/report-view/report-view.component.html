@@ -1,0 +1,53 @@
+<div  style="margin-top: 20px;">
+  <button class="btn"  (click)="generatePDF()">Generate PDF</button>
+</div>
+
+<div class="container" id="report-content">
+  <div class="background-image"></div>
+  <div class="header row">
+    <div class="col-4">
+      <p>DENTAL-HUB</p>
+      <p>Ramallah<br>
+      Bireh Medical Center<br>
+      +972599760214<br>
+      02-2410987</p>
+    </div>
+    <div class="col-4 text-center">
+      <img src="assets/pT7K9dg6c.jpg" alt="logo" class="logo">
+      <h3>Lab Order #617</h3>
+    </div>
+    <div class="col-4 doctor-info">
+      <p>DR. Tareq Bali</p>
+      <p>Dental surgeon & orthodontist<br>
+      Misr University for science & technology<br>
+      email: drtareqdentalhub.com</p>
+    </div>
+  </div>
+
+  <div class="lab-order">
+    <p>Doctor Name: <span>{{ visits[0].doctorUserNameEn }}</span></p>
+    <p>Patient: <span>{{ visits[0].patientName }}</span> Date: <span>{{ visits[0].visitDate | date:'medium' }}</span></p>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Department</th>
+        <th>Visit Date</th>
+        <th>Visit Start Date</th>
+        <th>Visit End Date</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let visit of visits">
+        <td>{{ visit.departmentName }}</td>
+        <td>{{ visit.visitDate | date:'medium' }}</td>
+        <td>{{ visit.visitStartDate | date:'medium' }}</td>
+        <td>{{ visit.visitEndDate | date:'medium' }}</td>
+        <td>{{ visit.physicianNotes }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>
