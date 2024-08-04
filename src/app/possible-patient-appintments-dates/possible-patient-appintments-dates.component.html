@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container">
   <app-calendar-header-component
     [(view)]="view"
     [(viewDate)]="viewDate"
@@ -44,7 +44,7 @@
     <div class="event-list mt-4">
       <h3>Marked Dates</h3>
       <ul class="list-group">
-        <li *ngFor="let event of events" class="list-group-item">
+        <li *ngFor="let event of events" class="list-group-item" (click)="goToEvent(event)">
           <strong>{{ event.title }}</strong> - {{ event.start | date:'fullDate' }}
         </li>
       </ul>

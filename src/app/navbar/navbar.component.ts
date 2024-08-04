@@ -4,11 +4,12 @@ import { DoctorsVisitedComponent } from '../doctors-visited/doctors-visited.comp
 import { PatientDetailComponent } from "../patient-detail/patient-detail.component";
 import { PossiblePatientAppintmentsDatesComponent } from '../possible-patient-appintments-dates/possible-patient-appintments-dates.component';
 import { RouterModule } from '@angular/router';
+import { BookForPatientModule } from '../book-for-patient/book-for-patient.module';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

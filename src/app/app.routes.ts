@@ -19,6 +19,8 @@ export const routes: Routes = [
             { path: 'appintmentsDates', component: PossiblePatientAppintmentsDatesComponent },
             { path: 'report-view', component: ReportViewComponent },
             { path: '', redirectTo: '/patientDetail', pathMatch: 'full' }, 
+            { path: 'bookForPatient', loadChildren: () => import('../app/book-for-patient/book-for-patient.module').then(m => m.BookForPatientModule) }
+
         ]
     },
     { path: '**', redirectTo: '/login', pathMatch: 'full' } 

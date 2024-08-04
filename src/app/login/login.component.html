@@ -54,7 +54,7 @@
                       </div>
                     </div>
                     <div class="pt-1 mb-2">
-                      <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                      <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block" type="submit"><span *ngIf="!loading ; else spinner">submit</span></button>
                     </div>
                   </form>
                 </div>
@@ -65,4 +65,8 @@
       </div>
     </div>
   </section>
+
+<ng-template #spinner>
+  loading...
+</ng-template>
   

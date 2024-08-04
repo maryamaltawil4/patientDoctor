@@ -68,4 +68,11 @@ export class PossiblePatientAppintmentsDatesComponent implements OnInit {
   eventClicked(event: CalendarEvent): void {
     console.log('Event clicked', event);
   }
+
+  // New method to handle clicking an event in the list
+  goToEvent(event: CalendarEvent): void {
+    this.viewDate = event.start; // Set the view date to the event's start date
+    this.view = CalendarView.Day; // Switch to day view to see the event
+    this.activeDayIsOpen = true; // Open the day view
+  }
 }

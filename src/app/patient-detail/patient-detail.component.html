@@ -1,11 +1,30 @@
+<div class="patient-details-container-wrapper">
+    <div *ngIf="patientDetails" class="patient-details-container">
+        <h2>Patient Details</h2>
+        <div class="patient-detail">
+            <label>MRN:</label>
+            <span>{{ patientDetails.mrn }}</span>
+        </div>
+        <div class="patient-detail">
+            <label>Arabic Full Name:</label>
+            <span>{{ patientDetails.arFullName }}</span>
+        </div>
+        <div class="patient-detail">
+            <label>English Full Name:</label>
+            <span>{{ patientDetails.enFullName }}</span>
+        </div>
+        <div class="patient-detail">
+            <label>Birth Date:</label>
+            <span>{{ patientDetails.birthDate | date: 'longDate' }}</span>
+        </div>
+        <div class="patient-detail">
+            <label>Gender:</label>
+            <span>{{ patientDetails.genderNameEn }}</span>
+        </div>
+        <div class="patient-detail">
+            <label>Blood Group:</label>
+            <span>{{ patientDetails.bloodGroupNameEn }}</span>
+        </div>
 
-<div *ngIf="patientDetails" class="patient-details-container">
-    <h2>Patient Details</h2>
-    <p><strong>MRN:</strong> {{ patientDetails.mrn }}</p>
-    <p><strong>Arabic Full Name:</strong> {{ patientDetails.arFullName }}</p>
-    <p><strong>English Full Name:</strong> {{ patientDetails.enFullName }}</p>
-    <p><strong>Birth Date:</strong> {{ patientDetails.birthDate | date: 'longDate' }}</p>
-    <p><strong>Gender:</strong> {{ patientDetails.genderNameEn }}</p>
-    <p><strong>Blood Group:</strong> {{ patientDetails.bloodGroupNameEn }}</p>
 </div>
-  
+</div>

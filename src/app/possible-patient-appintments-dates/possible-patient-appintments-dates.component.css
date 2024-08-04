@@ -1,22 +1,40 @@
 .container {
-  height: 100vh; /* Make the container take the full height of the viewport */
   display: flex;
   flex-direction: column;
+  align-items: center;
+  max-width: 100%;
 }
 
 .calendar-container {
-  flex: 1; /* Let the calendar-container take the remaining height after the header */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .calendar {
-  height: 70%; /* Make the calendar take 70% of the container height */
-  overflow-y: auto; /* Allow scrolling if content overflows */
+  flex: 3;
+  height: 70vh; /* Set the maximum height for the calendar */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Disable horizontal scrolling if not needed */
 }
 
 .event-list {
-  height: 30%; /* Make the event list take the remaining 30% of the container height */
-  overflow-y: auto; /* Allow scrolling if the list is too long */
+  flex: 1;
+  margin-left: 20px;
+  overflow-y: auto;
+  max-height: 70vh; /* Set the maximum height for the event list to match the calendar */
 }
 
+.event-list h3 {
+  margin-top: 0;
+}
+
+.event-list ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.event-list .list-group-item {
+  margin-bottom: 10px;
+}

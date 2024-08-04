@@ -6,13 +6,14 @@ import { NavbarComponent } from "./navbar/navbar.component";
 import { DoctorsVisitedComponent } from './doctors-visited/doctors-visited.component';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './serves/auth.service';
+import { BookForPatientModule } from './book-for-patient/book-for-patient.module';
 
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ CommonModule,RouterOutlet, LoginComponent, HttpClientModule, NavbarComponent , DoctorsVisitedComponent],
+  imports: [ CommonModule,RouterOutlet, LoginComponent, HttpClientModule, NavbarComponent , DoctorsVisitedComponent ,BookForPatientModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -15,6 +15,8 @@ import { AuthService } from '../serves/auth.service';
 })
 export class LoginComponent {
 
+  loading:boolean=false;
+
   constructor(private _patientService: PatientService, private _Router: Router , private _authService :AuthService) {}
 
   loginForm: FormGroup = new FormGroup({
@@ -26,6 +28,7 @@ export class LoginComponent {
   });
 
   loginData(formData: FormGroup) {
+    this.loading=true;
     if (formData.valid) {
       this._patientService.login(formData.value).subscribe({
         next: (data) => {
@@ -34,6 +37,7 @@ export class LoginComponent {
           this._patientService.currentPatient();
           this._authService.login(); 
           this._Router.navigate(['/']);
+          this.loading=false;
 
         },
         error: (error => console.log(error))

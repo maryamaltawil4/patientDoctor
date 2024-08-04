@@ -1,0 +1,23 @@
+<h2 style="text-align: center;">Department in Hospital</h2>
+
+<table style="width: 70%; margin: 0 auto; border-collapse: collapse;">
+  <thead>
+    <tr style="background-color: #f2f2f2;">
+      <th >Number</th>
+      <th >Name</th>
+      <th >Branches</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr  *ngFor="let data of departmentData; let i = index">
+      <td  style="border: 1px solid #ddd; text-align: center; " o>{{ i + 1 }}</td>
+      <td (click) ="branches(data.value)" class="p-2">{{ data.labelEn }}</td>
+      
+      <td >
+        <ul *ngIf="isActive(data.value)">
+          <li *ngFor="let branch of branchesData[data.value]">{{ branch.labelEn }}</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
