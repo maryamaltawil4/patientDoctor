@@ -1,0 +1,19 @@
+<div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-sm p-4">
+          <h4 class="text-center mb-4">Select a Branch and View Doctors</h4>
+          <div class="form-group">
+            <select id="branchSelect" (change)="onBranchSelect($event)" class="form-select">
+              <option value="" disabled selected>Select a branch</option>
+              <option *ngFor="let branch of branchesData" [value]="branch.value">{{ branch.labelEn }}</option>
+            </select>
+          </div>
+          <div class="text-center mt-4">
+            <button (click)="showDoctors()" class="btn btn-primary">Show Doctors</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

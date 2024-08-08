@@ -1,34 +1,31 @@
-
 <div class="container-fluid">
-    <div class="row flex-nowrap"  style="min-height: 100vh;">
-      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 pt-5" style="background-color: #2d3039;">
-        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white w-100">
-          
-          <a routerLink="/patientDetail" class="d-flex align-items-center pt-5 pb-5 mb-md-0 me-md-auto text-white text-decoration-none">
-            <span class="fs-5 d-none d-sm-inline">Home</span>
-          </a>
-          <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-            <li class="nav-item">
-              <a routerLink="/appintmentsDates" class="nav-link align-middle px-0 text-white">
-                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Appintments Dates</span>
-              </a>
-            </li>
-            <li>
-              <a routerLink="/doctors-visited" class="nav-link px-0 align-middle text-white">
-                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Doctors Visited</span>
-              </a>
-            </li>
-            <li>
-              <a routerLink="/bookForPatient" class="nav-link px-0 align-middle text-white">
-                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Book appintments</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="col py-3">
-        <router-outlet></router-outlet>
+  <div class="row flex-nowrap">
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 pt-5 position-fixed" style="background-color: #2d3039; height: 100vh;">
+      <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white w-100">
+        <a routerLink="/patientDetail" class="d-flex align-items-center pt-5 pb-5 mb-md-0 me-md-auto text-white text-decoration-none">
+          <span class="fs-5 d-none d-sm-inline">Home</span>
+        </a>
+        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+          <li class="nav-item">
+            <a routerLink="/appintmentsDates" class="nav-link align-middle px-0 text-white">
+              <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Appointments Dates</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/doctors-visited" class="nav-link px-0 align-middle text-white">
+              <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Doctors Visited</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/bookForPatient" class="nav-link px-0 align-middle text-white">
+              <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Book Appointments</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
+    <div class="col py-3" style="margin-left: 16.66666667%;"> <!-- fixed -->
+      <router-outlet></router-outlet>
+    </div>
   </div>
-  
+</div>

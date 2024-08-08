@@ -1,0 +1,28 @@
+.doctor-details-container-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .doctor-details-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .doctor-detail {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .doctor-detail label {
+    font-weight: bold;
+    color: #555;
+    width: 150px;
+  }
+  
+  .doctor-detail span {
+    color: #333;
+  }
+  

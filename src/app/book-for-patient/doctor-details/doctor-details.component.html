@@ -1,0 +1,38 @@
+
+
+<div class="doctor-details-container-wrapper my-4">
+  <div *ngIf="dataDoctor | async as doctor" class="card doctor-details-container p-4">
+    <h4 class="text-center card-title">Doctor Details</h4>
+    <div class="doctor-detail">
+      <label>Doctor ID:</label>
+      <span>{{ doctor.userID }}</span>
+    </div>
+    <div class="doctor-detail">
+      <label>Name (Arabic):</label>
+      <span>{{ doctor.accArName }}</span>
+    </div>
+    <div class="doctor-detail">
+      <label>Name (English):</label>
+      <span>{{ doctor.accEnName }}</span>
+    </div>
+    <div class="doctor-detail">
+      <label>Gender:</label>
+      <span>{{ doctor.genderName }}</span>
+    </div>
+    <div class="doctor-detail">
+      <label>Nationality:</label>
+      <span>{{ doctor.nationalityName }}</span>
+    </div>
+    <div class="doctor-detail">
+      <label>Department:</label>
+      <span>{{ doctor.departmentName }}</span>
+    </div>
+    <div class="doctor-detail">
+      <label>Position:</label>
+      <span>{{ doctor.positionName }}</span>
+    </div>
+    <div class="text-center mt-4">
+      <button class="btn btn-primary" (click)="dateDoctor()">View Available Dates</button>
+    </div>
+  </div>
+</div>

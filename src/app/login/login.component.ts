@@ -35,7 +35,6 @@ export class LoginComponent {
           console.log(data);
           localStorage.setItem("patientToken", data.token);
           this._patientService.currentPatient();
-          this._authService.login(); 
           this._Router.navigate(['/']);
           this.loading=false;
 

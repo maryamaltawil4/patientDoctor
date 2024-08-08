@@ -1,53 +1,37 @@
-<div class="container">
-  <app-calendar-header-component
-    [(view)]="view"
-    [(viewDate)]="viewDate"
-    (viewDateChange)="fetchEvents()"
-    (viewChange)="fetchEvents()"
-  ></app-calendar-header-component>
+<div class="container mt-4">
+  <h3>Available Appointments</h3>
 
-  <ng-template #loading>
-    <div class="text-center">
-      <i class="fas fa-spin fa-spinner fa-5x"></i> <br />
-      Loading events...
-    </div>
-  </ng-template>
-
-  <div *ngIf="events$ | async as events; else loading" class="calendar-container">
-    <div [ngSwitch]="view" class="calendar">
-      <mwl-calendar-month-view
-        *ngSwitchCase="'month'"
-        [viewDate]="viewDate"
-        [events]="events"
-        [activeDayIsOpen]="activeDayIsOpen"
-        (dayClicked)="dayClicked($event)"
-        (eventClicked)="eventClicked($event.event)"
-      >
-      </mwl-calendar-month-view>
-      <mwl-calendar-week-view
-        *ngSwitchCase="'week'"
-        [viewDate]="viewDate"
-        [events]="events"
-        (eventClicked)="eventClicked($event.event)"
-      >
-      </mwl-calendar-week-view>
-      <mwl-calendar-day-view
-        *ngSwitchCase="'day'"
-        [viewDate]="viewDate"
-        [events]="events"
-        (eventClicked)="eventClicked($event.event)"
-      >
-      </mwl-calendar-day-view>
+  <div class="row">
+   
+    <div class="col-md-8">
+      <div class='demo-app-main'>
+        <full-calendar [options]="calendarOptions">
+          <ng-template #eventContent let-arg>
+            <div style="display: flex; align-items: center;">
+              <div 
+                *ngIf="arg.event.extendedProps.color"
+                [style.background-color]="arg.event.extendedProps.color" 
+                style="width: 10px; height: 10px; margin-right: 5px; border-radius: 50%;">
+              </div>
+              <b>{{ arg.event.title }}</b>
+            </div>
+          </ng-template>
+        </full-calendar>
+      </div>
     </div>
 
-    <!-- List of events -->
-    <div class="event-list mt-4">
-      <h3>Marked Dates</h3>
-      <ul class="list-group">
-        <li *ngFor="let event of events" class="list-group-item" (click)="goToEvent(event)">
-          <strong>{{ event.title }}</strong> - {{ event.start | date:'fullDate' }}
-        </li>
-      </ul>
+
+    <div class="col-md-3">
+      <div class="event-list mt-4">
+        <h3>Marked Dates</h3>
+        <ul class="list-group">
+          <li *ngFor="let event of eventsList" class="list-group-item">
+            <strong>{{ event.title }}</strong> - 
+            Day: {{ formatDate(event['start'], 'EEEE') }}, 
+            {{ formatDate(event['start'], 'MMMM dd, yyyy') }}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

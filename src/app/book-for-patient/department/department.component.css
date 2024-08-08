@@ -3,3 +3,9 @@ th , tr {
     margin: auto;
     text-align: center
 }
+
+table {
+    width: 80%; 
+    margin: 0 auto;
+    border-collapse: collapse;
+}

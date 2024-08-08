@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { DoctorsVisitedComponent } from './doctors-visited/doctors-visited.component';
 import { CommonModule } from '@angular/common';
-import { AuthService } from './serves/auth.service';
 import { BookForPatientModule } from './book-for-patient/book-for-patient.module';
 
 
@@ -20,14 +19,5 @@ import { BookForPatientModule } from './book-for-patient/book-for-patient.module
 export class AppComponent {
   title = 'project';
 
-  isLoggedIn: boolean =false ;
-
-  constructor(private authService: AuthService) {}
-
-  ngOnInit() {
-    this.authService.isLoggedIn.subscribe(status => {
-      this.isLoggedIn = status;
-    });
-  }
 }
 
