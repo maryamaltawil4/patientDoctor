@@ -33,7 +33,7 @@ export class DoctorDetailsComponent implements OnInit {
 
   dateDoctor() {
     this._BookService.getDoctorAvailableAppointments(this.doctorId, this.departmentId, this.branchId, "").subscribe({
-      next: () => this._Router.navigate(['/bookForPatient/date', this.doctorId, this.departmentId, this.branchId]),
+      next: () => this._Router.navigate(['/bookForPatient/date', this.departmentId, this.branchId , this.doctorId] ),
       error: () => {
         Swal.fire({
           icon: 'error',

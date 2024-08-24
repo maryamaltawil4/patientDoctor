@@ -1,10 +1,10 @@
-<div class="container mt-4">
+<div class="container mt-5" >
   <h3>Available Appointments</h3>
 
   <div class="row">
    
-    <div class="col-md-8">
-      <div class='demo-app-main'>
+    <div class="col-md-8" style="z-index: -1;">
+      <div class='demo-app-main mt-5'>
         <full-calendar [options]="calendarOptions">
           <ng-template #eventContent let-arg>
             <div style="display: flex; align-items: center;">
@@ -21,8 +21,8 @@
     </div>
 
 
-    <div class="col-md-3">
-      <div class="event-list mt-4">
+    <div class="col-md-3" >
+      <div class="event-list mt-5">
         <h3>Marked Dates</h3>
         <ul class="list-group">
           <li *ngFor="let event of eventsList" class="list-group-item">

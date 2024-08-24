@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { height: 100%;  }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
 
 .fc .fc-daygrid-day-number , .fc .fc-col-header-cell-cushion {
     color:black !important;
@@ -16,4 +17,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
     display: none !important;
   }
+
+  .fc-direction-ltr {
+    direction: ltr;
+    text-align: left;
+    background-color: aliceblue;
+    padding: 16px;
+    border-radius: 9px;
+  }
+
+ /* styles.css or styles.scss */
+.highlighted-text {
+  background-color: yellow;
+  padding: 2px;
+  color: black;
+  font-weight: bold;
+}
+
   

@@ -1,6 +1,17 @@
+<div class="header">
+  <button class="menu-btn" (click)="toggleSidebar()">
+    &#9776; <!-- Hamburger Icon -->
+  </button>
+</div>
+
+<div class="overlay" *ngIf="isSidebarOpen" (click)="toggleSidebar()"></div> <!-- Overlay -->
+
 <div class="container-fluid">
   <div class="row flex-nowrap">
-    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 pt-5 position-fixed" style="background-color: #2d3039; height: 100vh;">
+    <div [ngClass]="{'col-auto col-md-3 col-xl-2': isSidebarOpen, 'col-auto': !isSidebarOpen}" 
+         class="px-sm-2 px-0 pt-5 position-fixed sidebar"
+         [ngClass]="{'show': isSidebarOpen}"
+         *ngIf="isSidebarOpen">
       <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white w-100">
         <a routerLink="/patientDetail" class="d-flex align-items-center pt-5 pb-5 mb-md-0 me-md-auto text-white text-decoration-none">
           <span class="fs-5 d-none d-sm-inline">Home</span>
@@ -8,24 +19,37 @@
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
           <li class="nav-item">
             <a routerLink="/appintmentsDates" class="nav-link align-middle px-0 text-white">
-              <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Appointments Dates</span>
+              <i class="fs-4 bi-house"></i> 
+              <span class="ms-1 d-none d-sm-inline">Appointments Dates</span>
             </a>
           </li>
           <li>
             <a routerLink="/doctors-visited" class="nav-link px-0 align-middle text-white">
-              <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Doctors Visited</span>
+              <i class="fs-4 bi-table"></i> 
+              <span class="ms-1 d-none d-sm-inline">Doctors Visited</span>
             </a>
           </li>
           <li>
             <a routerLink="/bookForPatient" class="nav-link px-0 align-middle text-white">
-              <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Book Appointments</span>
+              <i class="fs-4 bi-table"></i> 
+              <span class="ms-1 d-none d-sm-inline">Book Appointments</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/searchPatient" class="nav-link px-0 align-middle text-white">
+              <i class="fs-4 bi-search"></i> 
+              <span class="ms-1 d-none d-sm-inline">Search</span>
             </a>
           </li>
         </ul>
       </div>
     </div>
-    <div class="col py-3" style="margin-left: 16.66666667%;"> <!-- fixed -->
-      <router-outlet></router-outlet>
+
+    <!-- Main content area adjusts based on the sidebar -->
+    <div [ngClass]="{'col': true, 'ml-3': !isSidebarOpen}">
+      <div class="py-3">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
 </div>

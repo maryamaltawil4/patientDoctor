@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { BookService } from '../book-for-patient/book.service';
+import { BookService } from '../book.service';
 
 
 @Component({
@@ -38,7 +38,7 @@ export class BranchDoctorsComponent implements OnInit {
 
   showDoctors() {
     if (this.selectedBranch && this.departmentId) {
-      this._Router.navigate(['bookForPatient/doctorsdata', this.departmentId, this.selectedBranch]);
+      this._Router.navigate(['bookForPatient/doctor', this.departmentId, this.selectedBranch]);
     } else {
       Swal.fire({
         icon: 'warning',

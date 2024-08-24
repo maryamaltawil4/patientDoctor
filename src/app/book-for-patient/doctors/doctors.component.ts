@@ -31,7 +31,7 @@ export class DoctorsComponent implements OnInit {
 
   showDetails(doctorId: string) {
     if (this.departmentId && this.branchId) {
-      this._Router.navigate(['/bookForPatient/doctor', doctorId, this.departmentId, this.branchId ]);
+      this._Router.navigate(['/bookForPatient/doctor', this.departmentId, this.branchId , doctorId]);
     }
   }
 }

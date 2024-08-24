@@ -1,0 +1,30 @@
+<div class="container">
+    <h2>Select Date Range</h2>
+    <form [formGroup]="form" (ngSubmit)="fetchAvailableDays()">
+      <mat-form-field appearance="fill">
+        <mat-label>From Date</mat-label>
+        <input matInput [matDatepicker]="fromPicker" formControlName="fromDate">
+        <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+        <mat-datepicker #fromPicker></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>To Date</mat-label>
+        <input matInput [matDatepicker]="toPicker" formControlName="toDate">
+        <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+        <mat-datepicker #toPicker></mat-datepicker>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit">Check Availability</button>
+    </form>
+  
+    <div *ngIf="availableDays.length > 0" class="available-days mt-4">
+      <h3>Available Days</h3>
+      <ul class="list-group">
+        <li *ngFor="let day of availableDays" class="list-group-item">
+          {{ day.dayDate | date: 'fullDate' }} - Available: {{ day.anyAvailable }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  

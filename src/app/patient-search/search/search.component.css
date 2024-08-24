@@ -1,0 +1,197 @@
+.search-container {
+  position: relative;
+}
+
+.search-box {
+  position: relative;
+}
+
+input[type="text"] {
+  border: none;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  right: 0;
+  max-height: 550px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.patient-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* .container{
+  z-index: -8 px;
+} */
+
+.patient-table th,
+.patient-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.patient-table th {
+  background-color: #f2f2f2;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.table th {
+  vertical-align: middle;
+  text-align: center;
+  white-space: nowrap;
+}
+
+
+
+td {
+  text-align: center;
+}
+
+.order-type-item {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-type-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.card-header {
+  border: 1px solid;
+}
+
+
+.search-name { 
+      text-align: center;
+      padding-top: 5px;
+      color: #2d2a2a;   
+      font-size: 16px;
+}
+
+.search {
+  margin: 8px;
+  width: 100%;
+}
+
+.form-control:focus {
+  border: none !important;
+  box-shadow: none;
+}
+
+.order-type-image {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+}
+
+.selected-visit {
+  background-color: #e6f7ff; /* Light blue background to indicate selection */
+  border-left: 4px solid #1890ff; /* Blue border on the left */
+  font-weight: bold; /* Make the text bold */
+  
+}
+
+.visit-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.visit-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+  padding: 8px;
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
+}
+
+.visit-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  vertical-align: top;
+}
+
+.visit-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.visit-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.visit-table strong {
+  font-weight: bold;
+}
+
+.mat-expansion-panel-header {
+  font-weight: bold;
+  background-color: #f8f9fa;
+}
+
+.mat-expansion-panel-body {
+  padding: 16px;
+  background-color: #ffffff;
+}
+
+
+
+::ng-deep .highlighted-text {
+  background-color: yellow !important;
+  padding: 2px !important;
+  color: black !important;
+  font-weight: bold !important;
+}
+
+.visit-search{
+  background-color: #1890ff;
+}
+
+/* Custom CSS */
+::ng-deep .table {
+  border: 1px solid #ccc;
+}
+
+::ng-deep .table th,
+::ng-deep .table td {
+  border-bottom: 1px solid #ddd;
+}
+
+::ng-deep .table-hover tbody tr:hover {
+  background-color: #f7f2f2;
+}
+
+.highlighted-text {
+  background-color: yellow;
+  padding: 2px;
+  color: black;
+  font-weight: bold;
+}
+
+.visit-section{
+ width: 30% !important;
+}
+
+
+.container-fluid {
+padding-top: 30px;
+height: calc(100vh - 40px );
+}

@@ -1,0 +1,14 @@
+/* styles.css or styles.scss */
+.highlighted-text {
+    background-color: yellow;
+    padding: 2px;
+    color: black;
+    font-weight: bold;
+  }
+
+  ::ng-deep .highlighted-text{
+    background-color: yellow;
+    margin-top: 20px;
+  margin-bottom: 20px;
+  }
+  
