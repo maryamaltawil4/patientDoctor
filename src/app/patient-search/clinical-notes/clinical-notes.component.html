@@ -1,0 +1,62 @@
+<div class="card flex-grow-1" *ngIf="selectedOrderTypeID === -1 && orderDetails.length > 0">
+    <div class="card-header text-center">
+      Clinical Notes
+    </div>
+    <div class="card-body p-0 ">
+      <div class="table-responsive " style="max-height: 710px; overflow-y: auto; overflow-x: auto;">
+        <table class="table table-hover table-bordered mb-0 visit-table">
+          <thead>
+            <tr>
+              <th class="text-center" style="width: 10%;"># Visit</th>
+              <th class="text-center">Notes Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let visit of orderDetails; let i = index">
+              <td class="text-center align-middle">
+                <p style="font-size: 14px; font-weight: bold; margin-bottom: 0;">
+                  {{ i + 1 }}
+                </p>
+              </td>
+              <td>
+                <p>
+                  <a 
+                    class="btn btn-link mr-1 d-flex align-items-center" 
+                    (click)="toggleDetails(visit.visitID)" 
+                    style="font-size: 13px; font-weight: bold; text-decoration: none; color: black;"
+                  >
+                    Visit Type: {{ visit.visitTypeID }} | MRN: {{ mrn }} | Patient: {{ patientName }}  | Visit ID: {{ visit.visitID }} | Visit Date: {{visit.visitDate | date: 'MMM d yyyy hh:mm a' }}
+                    <i class="ms-2 bi" [ngClass]="{'bi-caret-down-fill': expandedVisitID !== visit.visitID, 'bi-caret-up-fill': expandedVisitID === visit.visitID}"></i>
+                  </a>
+                </p>
+                <div *ngIf="expandedVisitID === visit.visitID">
+                  <table class="table table-bordered mb-0">
+                    <tr>
+                      <td *ngIf="visit.visitTypeID">{{ visit.visitTypeID }}</td>
+                      <td *ngIf="visit.visitID"> {{ visit.visitID }}</td>
+                      <td *ngIf="visit.visitDate" style="white-space: nowrap;"> {{ visit.visitDate | date: 'MMM d yyyy hh:mm a' }}</td>
+                      <td>
+                        <div class="p-2" style="text-align: left">
+                          <strong *ngIf="visit.pastMedical">Past Medical:</strong> {{ visit.pastMedical }}<br *ngIf="visit.pastMedical">
+                          <strong *ngIf="visit.pastSurgical">Past Surgical:</strong> {{ visit.pastSurgical }}<br *ngIf="visit.pastSurgical">
+                          <strong *ngIf="visit.pastFamilySocialHistory">Past Family History:</strong> {{ visit.pastFamilySocialHistory }}<br *ngIf="visit.pastFamilySocialHistory">
+                          <strong *ngIf="visit.patientComplaints">Patient Complaints:</strong> {{ visit.patientComplaints }}<br *ngIf="visit.patientComplaints">
+                          <strong *ngIf="visit.historyOfPresentIllness">History Of Present Illness:</strong> {{ visit.historyOfPresentIllness }}<br *ngIf="visit.historyOfPresentIllness">
+                          <strong *ngIf="visit.reviewOfSystems">Review Of Systems:</strong> {{ visit.reviewOfSystems }}<br *ngIf="visit.reviewOfSystems">
+                          <strong *ngIf="visit.physicalExamination">Physical Examination:</strong> {{ visit.physicalExamination }}<br *ngIf="visit.physicalExamination">
+                          <strong *ngIf="visit.recommendationAndTreatmentPlan">Recommendation And Treatment Plan:</strong> {{ visit.recommendationAndTreatmentPlan }}<br *ngIf="visit.recommendationAndTreatmentPlan">
+                          <strong *ngIf="visit.dischargeMedication">Discharge Medication:</strong> {{ visit.dischargeMedication }}<br *ngIf="visit.dischargeMedication">
+                          <strong *ngIf="visit.dischargeFollowUp">Discharge Follow-Up:</strong> {{ visit.dischargeFollowUp }}<br *ngIf="visit.dischargeFollowUp">
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

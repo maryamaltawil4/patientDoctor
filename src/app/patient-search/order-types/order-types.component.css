@@ -1,0 +1,138 @@
+.search-container {
+    position: relative;
+  }
+  
+  .search-box {
+    position: relative;
+  }
+  
+  input[type="text"] {
+    border: none;
+  }
+  
+  .dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: -1px;
+    right: 0;
+    max-height: 550px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .patient-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  
+  
+  .patient-table th,
+  .patient-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .patient-table th {
+    background-color: #f2f2f2;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .table th {
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap;
+  }
+  
+  td {
+    text-align: center;
+  }
+  
+  .order-type-item {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .order-type-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+  
+  .card-header {
+    border: 1px solid;
+  }
+  
+  
+  .search-name { 
+        text-align: center;
+        padding-top: 5px;
+        color: #2d2a2a;   
+        font-size: 16px;
+  }
+  
+  .search {
+    margin: 8px;
+    width: 100%;
+  }
+  
+  .form-control:focus {
+    border: none !important;
+    box-shadow: none;
+  }
+  
+  .order-type-image {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+  }
+  
+  
+  
+  .visit-section{
+   width: 30% !important;
+   
+  }
+  
+  
+  .container-fluid {
+  padding-top: 30px;
+  height: calc(100vh - 40px );
+  }
+
+  .card {
+    width: 100%;
+    margin: 0;
+    border: none; /* Optional: to remove border and make it flush with the container */
+}
+
+.card-header {
+    background-color: #f8f9fa; /* Optional: to set the background color */
+    padding: 10px; /* Adjust padding as needed */
+}
+
+.card-body {
+    padding: 0;
+}
+
+.order-type-item {
+    width: 100%;
+    padding: 10px; /* Adjust padding as needed */
+}
+
+.order-type-image {
+    max-width: 40px; /* Adjust the size of the image */
+    height: auto;
+}

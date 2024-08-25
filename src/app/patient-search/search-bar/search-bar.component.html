@@ -1,0 +1,57 @@
+<div class="search-bar">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="search-container d-flex align-items-center position-relative" [class.expanded]="isExpanded"
+                (click)="preventClose($event)">
+                
+                <!-- Label for Patient Name -->
+                <label for="patientSearchInput" class="me-2 mb-0"><strong>Patient Name:</strong></label>
+
+                <!-- Search Input Box -->
+                <div class="search-box flex-grow-1 me-2 position-relative">
+                    <input id="patientSearchInput" type="text" class="form-control" placeholder="Search..."
+                        [(ngModel)]="searchTerm" (focus)="expand()" (input)="onSearchInput()" autocomplete="off">
+
+                    <!-- Dropdown List -->
+                    <div *ngIf="isExpanded && patients.length > 0" class="dropdown-list mt-2"
+                        (scroll)="onScroll($event)">
+                        <table class="table table-bordered table-hover patient-table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Avatar</th>
+                                    <th>MRN</th>
+                                    <th>Full Name (Arabic)</th>
+                                    <th>Full Name (English)</th>
+                                    <th>National ID</th>
+                                    <th>Birth Date</th>
+                                    <th>Telephone</th>
+                                    <th>Mobile</th>
+                                    <th>Blood Group</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let patient of patients" (click)="viewPatientVisits(patient.mrn)">
+                                    <td>
+                                        <img [src]="patient.genderID === 1 ? 'assets/images/male.jpg' : 'assets/images/female.png'"
+                                            alt="Patient Avatar" class="avatar">
+                                    </td>
+                                    <td>{{ patient.mrn }}</td>
+                                    <td class="text-nowrap">{{ patient.arFullName }}</td>
+                                    <td class="text-nowrap">{{ patient.enFullName }}</td>
+                                    <td>{{ patient.nationalID }}</td>
+                                    <td>{{ patient.birthDate | date: 'yyyy-MM-dd' }}</td>
+                                    <td>{{ patient.tel }}</td>
+                                    <td>{{ patient.mobile }}</td>
+                                    <td>{{ patient.bloodGroupNameEn }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Search Button -->
+                <button class="btn btn-custom" (click)="onSearchClick()">Search</button>
+            </div>
+        </div>
+    </div>
+</div>

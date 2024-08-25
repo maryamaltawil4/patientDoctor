@@ -1,0 +1,78 @@
+
+  
+  input[type="text"] {
+    border: none;
+  }
+
+  .table th {
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap;
+  }
+  
+  td {
+    text-align: center;
+  }
+  
+  .order-type-item {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .order-type-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+  
+  .card-header {
+    border: 1px solid;
+  }
+  
+  
+  .search-name { 
+        text-align: center;
+        padding-top: 5px;
+        color: #2d2a2a;   
+        font-size: 16px;
+  }
+  
+  .search {
+    margin: 8px;
+    width: 100%;
+  }
+  
+  .form-control:focus {
+    border: none !important;
+    box-shadow: none;
+  }
+  
+  .order-type-image {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+  }
+  
+  
+  
+  .visit-section{
+   width: 30% !important;
+   
+  }
+  
+  
+  .container-fluid {
+  padding-top: 30px;
+  height: calc(100vh - 40px );
+  }
+
+  .visit-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    border: 1px solid;
+  }
+  
+  td {
+    text-align: center;
+    padding: 6px;
+  }

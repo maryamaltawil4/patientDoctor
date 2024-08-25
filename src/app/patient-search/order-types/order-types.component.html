@@ -1,0 +1,23 @@
+<div class="card ">
+    <div class="card-header text-center">
+      Order Types
+    </div>
+    <div class="card-body p-0">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex justify-content-between align-items-center order-type-item"
+          *ngFor="let orderType of orderTypes" [style.backgroundColor]="orderType.backgroundColor"
+          (click)="viewOrderDetails(orderType.orderTypeID)">
+          <img [src]="orderType.imageUrl" alt="Order Type Image" class="order-type-image">
+          <span>{{ orderType.orderTypeNameEn }}</span>
+          <span class="badge badge-primary badge-pill text-dark">{{ orderType.count }}</span>
+        </li>
+        <!-- "See All" Option -->
+        <li *ngIf="selectedVisitID !== null"
+          class="list-group-item d-flex justify-content-between align-items-center order-type-item"
+          (click)="viewAllOrders()" style="cursor: pointer; background-color: #f8f9fa; text-align: center;">
+          >> See All
+        </li>
+      </ul>
+    </div>
+  </div>
+  

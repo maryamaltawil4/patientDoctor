@@ -1,0 +1,42 @@
+
+<!-- Search Bar -->
+<div class="search-bar">
+  <input type="text" class="form-control me-2" placeholder="Enter text to search ..." [(ngModel)]="visitSearchTerm">
+  <button class="btn btn-light text-dark" (click)="onFindClick()">Find</button>
+</div>
+
+<!-- Visits Table -->
+<div class="visits-table-container">
+  <table class="table table-hover mb-0">
+    <thead class="thead-light table-header">
+      <tr>
+        <th>MRN</th>
+        <th>Patient Name</th>
+        <th>Visit ID</th>
+        <th>Visit Start</th>
+        <th>Visit End</th>
+        <th>Visit Type</th>
+        <th>Visit Sub Type</th>
+        <th>Department</th>
+        <th>Doctor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr 
+        *ngFor="let visit of filteredVisitData" 
+        (click)="onVisitClick(visit.visitID)" 
+        [class.selected-visit]="visit.visitID === selectedVisitID"
+      >
+        <td [innerHTML]="visit.mrn" class="visit-data"></td>
+        <td [innerHTML]="visit.patientName" class="visit-data"></td>
+        <td [innerHTML]="visit.visitID" class="visit-data"></td>
+        <td [innerHTML]="visit.visitStartDate | date: 'MMM d yyyy hh:mm a'" class="visit-data"></td>
+        <td [innerHTML]="visit.visitDate | date: 'MMM d yyyy hh:mm a'" class="visit-data"></td>
+        <td class="visit-data">{{ visit.visitTypeID }}</td>
+        <td class="visit-data">{{ visit.visitSubTypeID }}</td>
+        <td class="visit-data">{{ visit.departmentID }}</td>
+        <td class="visit-data">{{ visit.doctorName }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

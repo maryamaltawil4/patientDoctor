@@ -1,0 +1,39 @@
+<div class="card-header text-center ">
+  Order Details
+</div>
+<div class="card-body p-0 ">
+  <div class="table-responsive" style="max-height: 710px; overflow-y: auto; overflow-x: auto; font-size: medium;">
+    <table class="table table-hover table-bordered mb-0 order-details-table">
+      <thead class="thead-light">
+        <tr>
+          <th>Order ID</th>
+          <th>Department Name</th>
+          <th>Order Date</th>
+          <th>Item Name</th>
+          <th>Quantity</th>
+          <th>Instructions</th>
+          <th>Acceptance Status</th>
+          <th>Test Results</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detail of orderDetails">
+          <td>{{ selectedOrder?.orderID }}</td>
+          <td>{{ selectedOrder?.departmentNameEn }}</td>
+          <td>{{ selectedOrder?.orderDate | date: 'MMM d yyyy hh:mm a' }}</td>
+          <td>{{ detail.itemName }}</td>
+          <td>{{ detail.quantity }}</td>
+          <td>{{ detail.instructions }}</td>
+          <td>{{ detail.acceptanceStatusNameEn }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let result of detail.lstResults">
+                {{ result.testDisplayName }}: {{ result.testResult }} {{ result.testUnitName }}
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

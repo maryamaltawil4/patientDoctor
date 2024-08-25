@@ -1,279 +1,50 @@
 <div class="container-fluid d-flex flex-column">
-  <!-- Main Content Section -->
-  <div class="row flex-grow-1" style="z-index: 10;">
-    <!-- Visits Section -->
-    <div class="visit-section col-lg-3 d-flex flex-column h-100 p-0" style="border: 1px solid black">
-      <!-- Search Bar -->
-      <div class="d-flex mb-2 p-2" style="background-color:#BCBFC1">
-        <input type="text" class="form-control me-2" placeholder="Enter text to search ..." [(ngModel)]="visitSearchTerm">
-        <button class="btn btn-light text-dark" (click)="filterVisits()">Find</button>
-      </div>
-
-      <!-- Visits Table -->
-      <div class="table-responsive h-100 ps-2" style="max-height: calc(100vh - 20%); overflow-y: auto; border: 1px solid #BCBFC1; background-color: white;">
-        <table class="table table-hover mb-0">
-          <thead class="thead-light" style="border-bottom: 2px solid #dbdada;">
-            <tr>
-              <th>MRN</th>
-              <th>Patient Name</th>
-              <th>Visit ID</th>
-              <th>Visit Start</th>
-              <th>Visit End</th>
-              <th>Visit Type</th>
-              <th>Visit Sub Type</th>
-              <th>Department</th>
-              <th>Doctor</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr 
-              *ngFor="let visit of filteredVisitData" 
-              (click)="showOrdersForVisit(visit.visitID)"
-              [class.selected-visit]="visit.visitID === selectedVisitID"
-            >
-              <td [innerHTML]="visit.mrn" style="border-right: 1px solid #8d8888; border-bottom: 1px solid #8d8888;"></td>
-              <td [innerHTML]="visit.patientName " style="border-right: 1px solid #8d8888; border-bottom: 1px solid #8d8888;"></td>
-              <td [innerHTML]="visit.visitID " style="border-right: 1px solid #8d8888; border-bottom: 1px solid #8d8888;"></td>
-              <td [innerHTML]="visit.visitStartDate" style="border-right: 1px solid #8d8888; border-bottom: 1px solid #8d8888;"></td>
-              <td [innerHTML]="visit.visitDate " style="border-right: 1px solid #8d8888; border-bottom: 1px solid #8d8888;"></td>
-              <td style="border-right: 1px solid #8d8888; border-bottom: 1px solid #8d8888;">{{ visit.visitTypeID }}</td>
-              <td style="border-right: 1px solid #8d8888; border-bottom: 1px solid #8d8888;">{{ visit.visitSubTypeID }}</td>
-              <td style="border-right: 1px solid #8d8888; border-bottom: 1px solid #8d8888;">{{ visit.departmentID }}</td>
-              <td style="border-right: 1px solid #8d8888; border-bottom: 1px solid #8d8888;">{{ visit.doctorName }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="row flex-grow-1 h-100" style="z-index: 10;">
+    <!-- visit-list Section -->
+    <div class="col-lg-4 d-flex flex-column visit-section h-100">
+      <app-visit-list [visitData]="visitData" (showOrdersForVisit)="showOrdersForVisit($event)"></app-visit-list>
     </div>
 
     <!-- Search and Orders Section -->
-    <div class="col-lg-8 d-flex flex-column h-100 ms-5" style="border: 1px solid; background-color:#BCBFC1">
+    <div class="col-lg-8 d-flex flex-column ms-3" style="border: 1px solid; background-color: #BCBFC1">
       <!-- Patient Search Bar -->
-      <div class="row mb-3 search">
-        <div class="col-2 search-name">
-          <label><strong>Patient Name</strong></label>
-        </div>
-        <div class="col-8">
-          <div class="search-container" [class.expanded]="isExpanded" (click)="preventClose($event)">
-            <div class="search-box">
-              <input 
-                type="text" 
-                class="form-control" 
-                placeholder="Search..." 
-                [(ngModel)]="searchTerm" 
-                (focus)="expand()"  
-                (input)="onSearchInput()" 
-                autocomplete="off"
-              > 
-            </div>
-
-            <div *ngIf="isExpanded && patients.length > 0" class="dropdown-list" (scroll)="onScroll($event)">
-              <table class="table table-bordered table-hover patient-table">
-                <thead class="thead-light">
-                  <tr>
-                    <th>Avatar</th>
-                    <th>MRN</th>
-                    <th>Full Name (Arabic)</th>
-                    <th>Full Name (English)</th>
-                    <th>National ID</th>
-                    <th>Birth Date</th>
-                    <th>Telephone</th>
-                    <th>Mobile</th>
-                    <th>Blood Group</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let patient of patients" (click)="viewPatientVisits(patient.mrn)">
-                    <td>
-                      <img [src]="patient.genderID === 1 ? 'assets/images/male.jpg' : 'assets/images/female.png'" alt="Patient Avatar" class="avatar">
-                    </td>
-                    <td>{{ patient.mrn }}</td>
-                    <td>{{ patient.arFullName }}</td>
-                    <td>{{ patient.enFullName }}</td>
-                    <td>{{ patient.nationalID }}</td>
-                    <td>{{ patient.birthDate | date: 'yyyy-MM-dd' }}</td>
-                    <td>{{ patient.tel }}</td>
-                    <td>{{ patient.mobile }}</td>
-                    <td>{{ patient.bloodGroupNameEn }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="col-2">
-          <button class="btn btn-light w-100" (click)="onSearch()">Search</button>
+      <div class="row mb-3">
+        <div class="col-12">
+          <app-search-bar (patientSelected)="onPatientSelected($event)"></app-search-bar>
         </div>
       </div>
 
-      <!-- Spinner for loading order types -->
-      <div *ngIf="isLoadingOrderTypes" class="d-flex justify-content-center my-3">
-        <div class="spinner-border text-primary" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
-
-      <!-- Orders and Order Details Section -->
-      <div class="row flex-grow-1" *ngIf="!isLoadingOrderTypes"> <!-- Hide the section while loading -->
-        <!-- Order Types Section -->
-        <div class="col-lg-4 d-flex flex-column" >
-          <div class="card ">
-            <div class="card-header text-center">
-              Order Types
-            </div>
-            <div class="card-body p-0">
-              <ul class="list-group list-group-flush">
-                <li 
-                  class="list-group-item d-flex justify-content-between align-items-center order-type-item" 
-                  *ngFor="let orderType of orderTypes" 
-                  [style.backgroundColor]="orderType.backgroundColor" 
-                  (click)="viewOrderDetails(orderType.orderTypeID)"
-                >
-                  <img [src]="orderType.imageUrl" alt="Order Type Image" class="order-type-image">
-                  <span>{{ orderType.orderTypeNameEn }}</span>
-                  <span class="badge badge-primary badge-pill text-dark">{{ orderType.count }}</span>
-                </li>
-                <!-- "See All" Option -->
-                <li 
-                  *ngIf="selectedVisitID !== null" 
-                  class="list-group-item d-flex justify-content-between align-items-center order-type-item" 
-                  (click)="viewAllOrders()"
-                  style="cursor: pointer; background-color: #f8f9fa; text-align: center;"
-                >
-                  >> See All
-                </li>
-              </ul>
-            </div>
-          </div>
+      <!-- Orders Section -->
+      <div class="row flex-grow-1" *ngIf="!isLoadingOrderTypes">
+        <!-- Order Types Column -->
+        <div class="col-lg-3 d-flex flex-column">
+          <app-order-types [mrn]="mrn" [selectedVisitID]="selectedVisitID"
+            (orderTypeSelected)="viewOrderDetails($event)">
+          </app-order-types>
         </div>
 
-        <div *ngIf="isLoadingOrderDetails" class="col-lg-3 d-flex justify-content-center align-items-center ms-5" style="height: 100%;">
-          <div class="spinner-border text-primary" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-        </div>
-        
-        
 
-        <!-- Order Details Section for Clinical Notes and Regular Orders -->
-        <div class="col-lg-8 d-flex flex-column"*ngIf="!isLoadingOrderDetails">
-          <!-- Clinical Notes -->
-          <div class="card flex-grow-1 mb-3" *ngIf="selectedOrderTypeID === -1 && orderDetails.length > 0">
-            <div class="card-header text-center">
-              Clinical Notes
-            </div>
-            <div class="card-body p-0 h-100">
-              <!-- Confined scrollable area for Clinical Notes -->
-              <div class="table-responsive h-100" style="max-height: 710px; overflow-y: auto; overflow-x: auto;">
-                <table class="table table-hover table-bordered mb-0 visit-table">
-                  <thead>
-                    <tr>
-                      <th class="text-center" style="width: 10%;"># Visit</th>
-                      <th class="text-center">Notes Details</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let visit of orderDetails; let i = index">
-                      <td class="text-center align-middle">
-                        <p style="font-size: 14px; font-weight: bold; margin-bottom: 0;">
-                          {{ i + 1 }}
-                        </p>
-                      </td>
-                      <td >
-                        <p>
-                          <a 
-                            class="btn btn-link mr-1 d-flex align-items-center" 
-                            data-bs-toggle="collapse" 
-                            [attr.href]="'#collapseVisit' + visit.visitID" 
-                            role="button" 
-                            aria-expanded="false" 
-                            [attr.aria-controls]="'collapseVisit' + visit.visitID"
-                            style="font-size: 13px; font-weight: bold; text-decoration: none; color: black;"
-                          >
-                            Visit Type: {{ visit.visitTypeID }} | MRN: {{ mrn }} | Patient: {{ patientName }}  | Visit ID: {{ visit.visitID }} | Visit Date: {{ visit.visitDate | date: 'MMM d yyyy hh:mm a' }}
-                            <i class="ms-2 bi bi-caret-down-fill "></i> <!-- Bootstrap icon for arrow down -->
-                          </a>
-                        </p>
-                        <div 
-                          class="collapse" 
-                          [attr.id]="'collapseVisit' + visit.visitID"
-                        >
-                          <table class="table table-bordered mb-0">
-                            <tr>
-                              <td *ngIf="visit.visitTypeID">{{ visit.visitTypeID }}</td>
-                              <td *ngIf="visit.visitID"> {{ visit.visitID }}</td>
-                              <td *ngIf="visit.visitDate"  style="white-space: nowrap;"> {{ visit.visitDate | date: 'MMM d yyyy hh:mm a' }}</td>
-                              <td >
-                                <div  style="text-align: left">
-                                  <strong *ngIf="visit.pastMedical">Past Medical:</strong> {{ visit.pastMedical }}<br *ngIf="visit.pastMedical">
-                                  <strong *ngIf="visit.pastSurgical">Past Surgical:</strong> {{ visit.pastSurgical }}<br *ngIf="visit.pastSurgical">
-                                  <strong *ngIf="visit.pastFamilySocialHistory">Past Family History:</strong> {{ visit.pastFamilySocialHistory }}<br *ngIf="visit.pastFamilySocialHistory">
-                                  <strong *ngIf="visit.patientComplaints">Patient Complaints:</strong> {{ visit.patientComplaints }}<br *ngIf="visit.patientComplaints">
-                                  <strong *ngIf="visit.historyOfPresentIllness">History Of Present Illness:</strong> {{ visit.historyOfPresentIllness }}<br *ngIf="visit.historyOfPresentIllness">
-                                  <strong *ngIf="visit.reviewOfSystems">Review Of Systems:</strong> {{ visit.reviewOfSystems }}<br *ngIf="visit.reviewOfSystems">
-                                  <strong *ngIf="visit.physicalExamination">Physical Examination:</strong> {{ visit.physicalExamination }}<br *ngIf="visit.physicalExamination">
-                                  <strong *ngIf="visit.recommendationAndTreatmentPlan">Recommendation And Treatment Plan:</strong> {{ visit.recommendationAndTreatmentPlan }}<br *ngIf="visit.recommendationAndTreatmentPlan">
-                                  <strong *ngIf="visit.dischargeMedication">Discharge Medication:</strong> {{ visit.dischargeMedication }}<br *ngIf="visit.dischargeMedication">
-                                  <strong *ngIf="visit.dischargeFollowUp">Discharge Follow-Up:</strong> {{ visit.dischargeFollowUp }}<br *ngIf="visit.dischargeFollowUp">
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+
+        <div class="col-lg-9 d-flex flex-column">
+            <!-- Order Details Column -->
+            <div *ngIf="isLoadingOrderDetails" class="col-lg-6 d-flex justify-content-center align-items-center w-100" style="height: 100%;">
+              <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
               </div>
             </div>
+          
+            <!-- Clinical Notes -->
+            <div *ngIf="selectedOrderTypeID === -1 && orderDetails.length > 0 && !isLoadingOrderDetails" style="height: 96%; background-color: white;">
+              <app-clinical-notes [orderDetails]="orderDetails" [selectedOrderTypeID]="selectedOrderTypeID" [mrn]="mrn"
+                [patientName]="patientName"></app-clinical-notes>
+            </div>
+          
+            <!-- Regular Orders -->
+            <div *ngIf="selectedOrderTypeID !== -1 && orderDetails.length > 0 && !isLoadingOrderDetails" style="height: 96%; background-color: white;">
+              <app-order-details [orderDetails]="orderDetails" [selectedOrder]="selectedOrder"></app-order-details>
+            </div>
           </div>
-
-        <!-- Regular Orders -->
-<div class="card flex-grow-1" *ngIf="selectedOrderTypeID !== -1 && orderDetails.length > 0">
-  <div class="card-header text-center">
-    Order Details
-  </div>
-  <div class="card-body p-0 h-100">
-    <!-- Confined scrollable area for Regular Orders -->
-    <div class="table-responsive" style="max-height: 710px; overflow-y: auto; overflow-x: auto; font-size: small;">
-     
-
-      <table class="table table-hover table-bordered mb-0">
-        <thead class="thead-light">
-          <tr>
-            <th>Order ID</th>
-            <th>Department Name</th>
-            <th>Order Date</th>
-            <th>Item Name</th>
-            <th>Quantity</th>
-            <th>Instructions</th>
-            <th>Acceptance Status</th>
-            <th>Test Results</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let detail of orderDetails">
-            <td>{{ selectedOrder?.orderID }}</td>
-            <td>{{ selectedOrder?.departmentNameEn }}</td>
-            <td>{{ selectedOrder?.orderDate | date: 'MMM d yyyy hh:mm a' }}</td>
-            <td>{{ detail.itemName }}</td>
-            <td>{{ detail.quantity }}</td>
-            <td>{{ detail.instructions }}</td>
-            <td>{{ detail.acceptanceStatusNameEn }}</td>
-            <td>
-              <ul>
-                <li *ngFor="let result of detail.lstResults">
-                  {{ result.testDisplayName }}: {{ result.testResult }} {{ result.testUnitName }}
-                </li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          
+      </div>
     </div>
   </div>
-</div>
-
-    </div>
-  </div>
-</div>
