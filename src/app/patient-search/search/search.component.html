@@ -23,28 +23,21 @@
           </app-order-types>
         </div>
 
-
-
         <div class="col-lg-9 d-flex flex-column">
-            <!-- Order Details Column -->
-            <div *ngIf="isLoadingOrderDetails" class="col-lg-6 d-flex justify-content-center align-items-center w-100" style="height: 100%;">
-              <div class="spinner-border text-primary" role="status">
-                <span class="sr-only">Loading...</span>
-              </div>
-            </div>
-          
+         
+
             <!-- Clinical Notes -->
-            <div *ngIf="selectedOrderTypeID === -1 && orderDetails.length > 0 && !isLoadingOrderDetails" style="height: 96%; background-color: white;">
-              <app-clinical-notes [orderDetails]="orderDetails" [selectedOrderTypeID]="selectedOrderTypeID" [mrn]="mrn"
-                [patientName]="patientName"></app-clinical-notes>
+            <div *ngIf="selectedOrderTypeID === -1" style="height: 96%; background-color: white;">
+              <app-clinical-notes [selectedVisitID]="selectedVisitID" [mrn]="mrn" [patientName]="patientName"></app-clinical-notes>
             </div>
-          
+
             <!-- Regular Orders -->
-            <div *ngIf="selectedOrderTypeID !== -1 && orderDetails.length > 0 && !isLoadingOrderDetails" style="height: 96%; background-color: white;">
-              <app-order-details [orderDetails]="orderDetails" [selectedOrder]="selectedOrder"></app-order-details>
+            <div *ngIf="selectedOrderTypeID !== -1" style="height: 96%; background-color: white;">
+              <app-order-details [selectedVisitID]="selectedVisitID" [mrn]="mrn" [selectedOrderTypeID]="selectedOrderTypeID"></app-order-details>
             </div>
           </div>
           
       </div>
     </div>
   </div>
+</div>

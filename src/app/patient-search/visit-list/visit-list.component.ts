@@ -37,7 +37,6 @@ export class VisitListComponent implements OnChanges {
   }
 
   onVisitClick(visitID: number | undefined) {
-    // Handle the case where visitID is undefined
     this.selectedVisitID = visitID !== undefined ? visitID : null;
     this.showOrdersForVisit.emit(visitID); 
   }

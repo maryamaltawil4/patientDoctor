@@ -147,12 +147,12 @@ export class OrderTypesComponent implements OnChanges {
   }
 
   viewOrderDetails(orderTypeID: number): void {
-  this.orderTypeSelected.emit(orderTypeID);
-}
-
+    this.orderTypeSelected.emit(orderTypeID);
+  }
 
   viewAllOrders(): void {
     this.selectedVisitID = null;
+    sessionStorage.setItem('selectedVisitID',"");
     this.filterOrderTypesByVisit();
     this.seeAllOrders.emit();
   }

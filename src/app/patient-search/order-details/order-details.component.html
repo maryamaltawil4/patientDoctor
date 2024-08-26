@@ -1,4 +1,12 @@
-<div class="card-header text-center ">
+<div *ngIf="isLoadingOrderDetails" class="col-lg-6 d-flex justify-content-center align-items-center w-100" style="height: 100%;">
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+
+<div *ngIf="selectedOrderTypeID !== -1 && orderDetails.length > 0 && !isLoadingOrderDetails">
+<div class="card-header text-center " >
   Order Details
 </div>
 <div class="card-body p-0 ">
@@ -36,4 +44,5 @@
       </tbody>
     </table>
   </div>
+</div>
 </div>

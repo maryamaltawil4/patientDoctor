@@ -10,7 +10,6 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
-  isExpanded = false;
   patients: any[] = [];
   isLoading: boolean = false;
   visitData: any[] = []; 
@@ -25,7 +24,6 @@ export class SearchComponent implements OnInit {
   patientName: string = '';
   isSidebarOpen: boolean = true;
   isLoadingOrderTypes: boolean = false;
-  isLoadingOrderDetails: boolean = false;
 
   selectedOrder: {
     orderID: number;
@@ -60,7 +58,6 @@ export class SearchComponent implements OnInit {
       sessionStorage.setItem('patientName', this.patientName);
       this.orderDetails = [];
       this.selectedOrder = null;
-      // Load visits and orders immediately after selecting the patient
       this.loadPatientVisits(mrn);
     }
   }
@@ -96,9 +93,13 @@ export class SearchComponent implements OnInit {
     if (this.patientName != '')
       sessionStorage.setItem('patientName', this.patientName);
   
-    this.isExpanded = false;
     this.PatientVisits(this.mrn);
     this.orderDetails = [];
+  }
+
+  viewOrderDetails(orderTypeID: number) {
+    this.selectedOrderTypeID = orderTypeID;
+    sessionStorage.setItem('selectedOrderTypeID', JSON.stringify(this.selectedOrderTypeID));
   }
 
   PatientVisits(mrn: number) {
@@ -138,56 +139,6 @@ export class SearchComponent implements OnInit {
       this.selectedVisitID = null;
     }
   }
-  viewOrderDetails(orderTypeID: number) {
-    this.isLoadingOrderDetails = true;
-    this.selectedOrderTypeID = orderTypeID;
-    sessionStorage.setItem('selectedOrderTypeID', JSON.stringify(this.selectedOrderTypeID));
-  
-    if (orderTypeID === -1) {
-      this.apiService.patientVisitOrders(this.mrn).subscribe((data: any) => {
-        this.orderDetails = data.lstRelatedVisitData.map((visit: any) => ({
-          visitID: visit.visitID,
-          visitTypeID: visit.visitTypeID,
-          visitSubTypeID: visit.visitSubTypeID,
-          visitDate: visit.visitDate,
-          visitStartDate: visit.visitStartDate,
-          departmentID: visit.departmentID,
-          doctorUserID: visit.doctorUserID,
-          doctorName: visit.doctorUserNameEn,
-          historyOfPresentIllness: visit.historyOfPresentIllness,
-          patientComplaints: visit.patientComplaints,
-          reviewOfSystems: visit.reviewOfSystems,
-          physicalExamination: visit.physicalExamination,
-          recommendationAndTreatmentPlan: visit.recommendationAndTreatmentPlan,
-          dischargeMedication: visit.dischargeMedication,
-          dischargeFollowUp: visit.dischargeFollowUp,
-          pastMedical: visit.pastMedical,
-          pastSurgical: visit.pastSurgical,
-          pastFamilySocialHistory: visit.pastFamilySocialHistory,
-        }));
-        this.isLoadingOrderDetails = false;
-      });
-    } else {
-      this.apiService
-        .visitOrdersDetailsBasedOrderType(this.selectedVisitID, orderTypeID, this.mrn)
-        .subscribe((data: any) => {
-          const order = data.lstBasedOrderType && data.lstBasedOrderType.length > 0 ? data.lstBasedOrderType[0] : null;
-          if (order) {
-            this.selectedOrder = {
-              orderID: order.orderID,
-              departmentNameEn: order.departmentNameEn,
-              orderDate: order.orderDate,
-            };
-            this.orderDetails = order.lstData || [];
-          } else {
-            this.selectedOrder = null;
-            this.orderDetails = [];
-          }
-          this.isLoadingOrderDetails = false;
-        });
-    }
-  }
-  
 
   updateOrderTypes() {
     if (!this.orderData) {
@@ -243,10 +194,6 @@ export class SearchComponent implements OnInit {
 
     if (selectedVisitID) {
       this.showOrdersForVisit(selectedVisitID);
-    }
-
-    if (selectedOrderTypeID) {
-      this.viewOrderDetails(selectedOrderTypeID);
     }
   }
 
