@@ -114,11 +114,7 @@ export class OrderTypesComponent implements OnChanges {
         const orderTypeCounts: { [key: number]: number } = {};
 
         orderData.forEach((order: any) => {
-          if (orderTypeCounts[order.orderTypeID]) {
-            orderTypeCounts[order.orderTypeID]++;
-          } else {
-            orderTypeCounts[order.orderTypeID] = 1;
-          }
+          orderTypeCounts[order.orderTypeID] = (orderTypeCounts[order.orderTypeID] || 0) + 1;
         });
 
         this.orderTypes = this.allOrderTypes
@@ -152,7 +148,7 @@ export class OrderTypesComponent implements OnChanges {
 
   viewAllOrders(): void {
     this.selectedVisitID = null;
-    sessionStorage.setItem('selectedVisitID',"");
+    sessionStorage.removeItem('selectedVisitID');
     this.filterOrderTypesByVisit();
     this.seeAllOrders.emit();
   }

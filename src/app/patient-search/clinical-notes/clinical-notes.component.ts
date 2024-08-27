@@ -6,23 +6,23 @@ import { ApiSearchService } from '../api-search.service';
   templateUrl: './clinical-notes.component.html',
   styleUrls: ['./clinical-notes.component.css']
 })
-export class ClinicalNotesComponent implements OnInit, OnChanges {
+export class ClinicalNotesComponent implements  OnChanges {
   @Input() selectedVisitID: number | null = null;
   @Input() mrn: number | null = null;
   @Input() patientName: string = '';
   expandedVisitID: number | null = null; 
+  @Input() selectedOrderTypeID: number | null = null;
+
 
   orderDetails: any[] = [];
   isLoading: boolean = false;
 
   constructor(private apiService: ApiSearchService) {}
 
-  ngOnInit(): void {
-    this.loadClinicalNotes();
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['mrn'] )  {
+    if ( changes['selectedVisitID'] || changes['selectedOrderTypeID'] ) {
+      console.log(this.selectedOrderTypeID +"notes")
       this.loadClinicalNotes();
     }
   }

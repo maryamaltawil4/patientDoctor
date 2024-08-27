@@ -2,7 +2,10 @@
   <div class="row flex-grow-1 h-100" style="z-index: 10;">
     <!-- visit-list Section -->
     <div class="col-lg-4 d-flex flex-column visit-section h-100">
-      <app-visit-list [visitData]="visitData" (showOrdersForVisit)="showOrdersForVisit($event)"></app-visit-list>
+      <app-visit-list [mrn]="mrn" [patientName]="patientName"  
+        (showOrdersForVisit)="selectedVisitID = $event !== undefined ? $event : null"
+        (resetOrderType)="onResetOrderType()">
+      </app-visit-list>
     </div>
 
     <!-- Search and Orders Section -->
@@ -19,24 +22,22 @@
         <!-- Order Types Column -->
         <div class="col-lg-3 d-flex flex-column">
           <app-order-types [mrn]="mrn" [selectedVisitID]="selectedVisitID"
-            (orderTypeSelected)="viewOrderDetails($event)">
+            (orderTypeSelected)="viewOrderDetails($event)" (seeAllOrders)="onSeeAllOrders()">
           </app-order-types>
         </div>
 
-        <div class="col-lg-9 d-flex flex-column">
-         
+        <div class="col-lg-9 d-flex flex-column" *ngIf="selectedOrderTypeID !== null ">
 
-            <!-- Clinical Notes -->
-            <div *ngIf="selectedOrderTypeID === -1" style="height: 96%; background-color: white;">
-              <app-clinical-notes [selectedVisitID]="selectedVisitID" [mrn]="mrn" [patientName]="patientName"></app-clinical-notes>
-            </div>
-
-            <!-- Regular Orders -->
-            <div *ngIf="selectedOrderTypeID !== -1" style="height: 96%; background-color: white;">
-              <app-order-details [selectedVisitID]="selectedVisitID" [mrn]="mrn" [selectedOrderTypeID]="selectedOrderTypeID"></app-order-details>
-            </div>
+          <!-- Clinical Notes -->
+          <div *ngIf="selectedOrderTypeID === -1 " style="height: 96%; background-color: white;">
+            <app-clinical-notes [selectedVisitID]="selectedVisitID" [mrn]="mrn" [patientName]="patientName" [selectedOrderTypeID]="selectedOrderTypeID"></app-clinical-notes>
           </div>
-          
+
+          <!-- Regular Orders -->
+          <div *ngIf="selectedOrderTypeID !== -1" style="height: 96%; background-color: white;">
+            <app-order-details [selectedVisitID]="selectedVisitID" [mrn]="mrn" [selectedOrderTypeID]="selectedOrderTypeID"></app-order-details>
+          </div>
+        </div>
       </div>
     </div>
   </div>
